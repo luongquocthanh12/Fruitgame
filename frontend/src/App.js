@@ -356,9 +356,10 @@ const FruitBoxGame = () => {
               className="game-canvas"
             />
           </div>
-          <div className="game-info">
-            <p>Draw rectangles around apples that sum to 10!</p>
-          </div>
+            <div className="game-info">
+              <p>Vẽ hình chữ nhật quanh những quả táo có tổng = 10!</p>
+              <p>Grid: {GRID_COLS}x{GRID_ROWS} | Táo còn lại: {apples.filter(a => !a.removed).length}</p>
+            </div>
         </div>
       )}
 
