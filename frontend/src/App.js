@@ -14,10 +14,11 @@ const FruitBoxGame = () => {
   const gameIntervalRef = useRef(null);
 
   // Game constants
-  const GRID_SIZE = 8;
-  const APPLE_SIZE = 60;
-  const CANVAS_WIDTH = GRID_SIZE * APPLE_SIZE;
-  const CANVAS_HEIGHT = GRID_SIZE * APPLE_SIZE;
+  const GRID_COLS = 17;
+  const GRID_ROWS = 10;
+  const APPLE_SIZE = 35;
+  const CANVAS_WIDTH = GRID_COLS * APPLE_SIZE;
+  const CANVAS_HEIGHT = GRID_ROWS * APPLE_SIZE;
 
   // Generate random apples
   const generateApples = useCallback(() => {
