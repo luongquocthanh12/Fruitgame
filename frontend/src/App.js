@@ -366,24 +366,24 @@ const FruitBoxGame = () => {
       {gameState === 'gameOver' && (
         <div className="game-over">
           <div className="game-over-content">
-            <h2>🎮 Game Over! 🎮</h2>
+            <h2>🎮 Kết thúc! 🎮</h2>
             <div className="final-score">
-              <p>Final Score: <span className="score-number">{score}</span></p>
+              <p>Điểm cuối: <span className="score-number">{score}</span></p>
               <p className="score-message">
-                {score < 20 ? "Keep practicing!" : 
-                 score < 50 ? "Good job!" : 
-                 score < 80 ? "Great work!" : "Amazing! You're a Fruit Box master!"}
+                {score < 50 ? "Tiếp tục luyện tập!" : 
+                 score < 100 ? "Làm tốt lắm!" : 
+                 score < 150 ? "Xuất sắc!" : "Tuyệt vời! Bạn là bậc thầy Fruit Box!"}
               </p>
             </div>
             <div className="game-over-buttons">
               <button className="play-again-button" onClick={startGame}>
-                Play Again
+                Chơi lại
               </button>
               <button 
                 className="menu-button" 
                 onClick={() => setGameState('menu')}
               >
-                Main Menu
+                Menu chính
               </button>
             </div>
           </div>
