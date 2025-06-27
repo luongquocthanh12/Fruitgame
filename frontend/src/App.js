@@ -23,9 +23,9 @@ const FruitBoxGame = () => {
   // Generate random apples
   const generateApples = useCallback(() => {
     const newApples = [];
-    for (let i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
-      const x = (i % GRID_SIZE) * APPLE_SIZE;
-      const y = Math.floor(i / GRID_SIZE) * APPLE_SIZE;
+    for (let i = 0; i < GRID_COLS * GRID_ROWS; i++) {
+      const x = (i % GRID_COLS) * APPLE_SIZE;
+      const y = Math.floor(i / GRID_COLS) * APPLE_SIZE;
       newApples.push({
         id: i,
         x: x + APPLE_SIZE / 2,
