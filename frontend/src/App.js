@@ -45,7 +45,45 @@ const FruitBoxGame = () => {
     setApples(generateApples());
   };
 
-  // Timer effect
+  // Check if game should end (no valid moves left)
+  const checkGameEnd = useCallback((currentApples) => {
+    const activeApples = currentApples.filter(apple => !apple.removed);
+    
+    // Check if any combination can sum to 10
+    for (let i = 0; i < activeApples.length; i++) {
+      for (let j = i + 1; j < activeApples.length; j++) {
+        // Check all possible rectangular combinations
+        const minX = Math.min(activeApples[i].x, activeApples[j].x);
+        const maxX = Math.max(activeApples[i].x, activeApples[j].x);
+        const minY = Math.min(activeApples[i].y, activeApples[j].y);
+        const maxY = Math.max(activeApples[i].y, activeApples[j].y);
+        
+        const selectedApples = activeApples.filter(apple => 
+          apple.x >= minX - APPLE_SIZE/2 &&
+          apple.x <= maxX + APPLE_SIZE/2 &&
+          apple.y >= minY - APPLE_SIZE/2 &&
+          apple.y <= maxY + APPLE_SIZE/2
+        );
+        
+        const sum = selectedApples.reduce((total, apple) => total + apple.value, 0);
+        if (sum === 10) {
+          return false; // Valid move found, game continues
+        }
+      }
+    }
+    
+    return true; // No valid moves, game should end
+  }, []);
+
+  // Check for game end condition
+  useEffect(() => {
+    if (gameState === 'playing' && apples.length > 0) {
+      const gameEnded = checkGameEnd(apples);
+      if (gameEnded) {
+        setGameState('gameOver');
+      }
+    }
+  }, [apples, gameState, checkGameEnd]);
   useEffect(() => {
     if (gameState === 'playing' && timeLeft > 0) {
       gameIntervalRef.current = setTimeout(() => {
