@@ -112,12 +112,16 @@ const FruitBoxGame = () => {
     // Draw grid
     ctx.strokeStyle = lightColors ? '#DDD' : '#D4C5A9';
     ctx.lineWidth = 1;
-    for (let i = 0; i <= GRID_SIZE; i++) {
+    // Draw vertical grid lines
+    for (let i = 0; i <= GRID_COLS; i++) {
       ctx.beginPath();
       ctx.moveTo(i * APPLE_SIZE, 0);
       ctx.lineTo(i * APPLE_SIZE, CANVAS_HEIGHT);
       ctx.stroke();
-
+    }
+    
+    // Draw horizontal grid lines
+    for (let i = 0; i <= GRID_ROWS; i++) {
       ctx.beginPath();
       ctx.moveTo(0, i * APPLE_SIZE);
       ctx.lineTo(CANVAS_WIDTH, i * APPLE_SIZE);
