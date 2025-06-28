@@ -270,7 +270,7 @@ const FruitBoxGame = () => {
     const sum = selectedApples.reduce((total, apple) => total + apple.value, 0);
     
     if (sum === 10 && selectedApples.length > 0) {
-      // Valid selection - remove apples and add score
+      // Valid selection - remove apples and add score (NO NEW APPLES)
       setApples(prevApples => 
         prevApples.map(apple => 
           selectedApples.includes(apple) 
@@ -279,24 +279,6 @@ const FruitBoxGame = () => {
         )
       );
       setScore(prevScore => prevScore + selectedApples.length);
-      
-      // Generate new apples to replace removed ones
-      setTimeout(() => {
-        setApples(prevApples => {
-          const newApples = [...prevApples];
-          selectedApples.forEach(removedApple => {
-            const index = newApples.findIndex(a => a.id === removedApple.id);
-            if (index !== -1) {
-              newApples[index] = {
-                ...removedApple,
-                value: Math.floor(Math.random() * 9) + 1,
-                removed: false
-              };
-            }
-          });
-          return newApples;
-        });
-      }, 500);
     }
 
     setIsDrawing(false);
