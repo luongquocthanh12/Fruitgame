@@ -69,7 +69,64 @@ const FruitBoxGame = () => {
     return newApples;
   }, []);
 
-  // Load high score from localStorage
+  // Audio functions
+  const playSound = (soundType) => {
+    if (!soundEnabled) return;
+    
+    try {
+      // For now, we'll use a simple beep sound as placeholder
+      // Later, these can be replaced with actual audio files
+      const audioContext = audioContextRef.current || new (window.AudioContext || window.webkitAudioContext)();
+      audioContextRef.current = audioContext;
+      
+      let frequency;
+      let duration;
+      
+      switch (soundType) {
+        case 'appleFall':
+          frequency = 200;
+          duration = 0.3;
+          break;
+        case 'success':
+          frequency = 500;
+          duration = 0.2;
+          break;
+        case 'gameOver':
+          frequency = 150;
+          duration = 1;
+          break;
+        default:
+          return;
+      }
+      
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+      oscillator.type = 'sine';
+      
+      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + duration);
+    } catch (error) {
+      console.log('Audio not supported:', error);
+    }
+  };
+
+  // Reset current game
+  const resetGame = () => {
+    setApples(generateApples());
+    setFallingApples([]);
+    setScore(0);
+    setTimeLeft(difficultySettings[difficulty].time);
+    setCurrentRect(null);
+    setIsDrawing(false);
+  };
   useEffect(() => {
     const savedHighScore = localStorage.getItem('fruitBoxHighScore');
     if (savedHighScore) {
