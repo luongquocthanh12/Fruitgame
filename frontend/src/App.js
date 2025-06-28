@@ -142,7 +142,38 @@ const FruitBoxGame = () => {
     }
   };
 
-  // Start game with selected difficulty
+  // Animation loop for falling apples
+  const animate = useCallback(() => {
+    setFallingApples(prevFalling => {
+      return prevFalling.map(apple => ({
+        ...apple,
+        y: apple.y + apple.fallSpeed,
+        rotation: apple.rotation + apple.rotationSpeed,
+        opacity: Math.max(0, apple.opacity - 0.02)
+      })).filter(apple => apple.y < CANVAS_HEIGHT + 50 && apple.opacity > 0);
+    });
+
+    if (gameState === 'playing') {
+      animationRef.current = requestAnimationFrame(animate);
+    }
+  }, [gameState]);
+
+  // Start animation when game starts
+  useEffect(() => {
+    if (gameState === 'playing') {
+      animationRef.current = requestAnimationFrame(animate);
+    } else {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [gameState, animate]);
   const startGame = (selectedDifficulty) => {
     const diffSetting = difficultySettings[selectedDifficulty];
     setGameState('playing');
