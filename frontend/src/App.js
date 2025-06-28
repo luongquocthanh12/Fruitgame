@@ -10,11 +10,33 @@ const FruitBoxGame = () => {
   const [difficulty, setDifficulty] = useState('medium');
   const [highScore, setHighScore] = useState(0);
   const [apples, setApples] = useState([]);
+  const [fallingApples, setFallingApples] = useState([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
   const [currentRect, setCurrentRect] = useState(null);
   const [lightColors, setLightColors] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
   const gameIntervalRef = useRef(null);
+  const animationRef = useRef(null);
+  const audioContextRef = useRef(null);
+
+  // Audio configuration - easily replaceable
+  const audioConfig = {
+    backgroundMusic: '/audio/background.mp3', // Placeholder path
+    appleFall: '/audio/apple-fall.wav',       // Placeholder path
+    gameOver: '/audio/game-over.mp3',         // Placeholder path
+    success: '/audio/success.wav'             // Placeholder path
+  };
+
+  // Apple texture configuration - easily replaceable
+  const appleTextures = {
+    default: {
+      bodyColor: lightColors ? '#FFB3BA' : '#FF6B6B',
+      highlightColor: lightColors ? '#FFD1DC' : '#FF8E8E',
+      stemColor: '#4ECDC4',
+      leafColor: '#4ECDC4'
+    }
+  };
 
   // Difficulty settings
   const difficultySettings = {
