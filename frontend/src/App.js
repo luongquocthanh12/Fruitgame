@@ -378,8 +378,13 @@ const FruitBoxGame = () => {
       {gameState === 'playing' && (
         <div className="game-playing">
           <div className="game-hud">
-            <div className="score">Score: {score}</div>
-            <div className="time">Time: {timeLeft}s</div>
+            <div className="score">Điểm: {score}</div>
+            <div className="difficulty-indicator">
+              <span style={{ color: difficultySettings[difficulty].color }}>
+                {difficultySettings[difficulty].name}
+              </span>
+            </div>
+            <div className="time">⏱️ {timeLeft}s</div>
             <button 
               className="light-toggle-btn"
               onClick={() => setLightColors(!lightColors)}
@@ -387,6 +392,17 @@ const FruitBoxGame = () => {
               {lightColors ? '🌙' : '☀️'}
             </button>
           </div>
+          
+          <div className="time-progress-container">
+            <div 
+              className="time-progress-bar"
+              style={{ 
+                width: `${(timeLeft / totalTime) * 100}%`,
+                backgroundColor: difficultySettings[difficulty].color 
+              }}
+            ></div>
+          </div>
+
           <div className="game-canvas-container">
             <canvas
               ref={canvasRef}
@@ -401,10 +417,10 @@ const FruitBoxGame = () => {
               className="game-canvas"
             />
           </div>
-            <div className="game-info">
-              <p>Vẽ hình chữ nhật quanh những quả táo có tổng = 10!</p>
-              <p>Grid: {GRID_COLS}x{GRID_ROWS} | Táo còn lại: {apples.filter(a => !a.removed).length}</p>
-            </div>
+          <div className="game-info">
+            <p>Vẽ hình chữ nhật quanh những quả táo có tổng = 10!</p>
+            <p>Grid: {GRID_COLS}x{GRID_ROWS} | Táo còn lại: {apples.filter(a => !a.removed).length}</p>
+          </div>
         </div>
       )}
 
