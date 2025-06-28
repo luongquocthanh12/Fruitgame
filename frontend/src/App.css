@@ -461,17 +461,28 @@ body {
     padding: 5px;
   }
 
-  .game-title {
+  .game-title, .difficulty-title {
     font-size: 2.5rem;
   }
 
-  .game-menu, .game-playing, .game-over {
+  .game-menu, .game-playing, .game-over, .difficulty-menu {
     padding: 15px;
   }
 
   .game-hud {
     font-size: 0.9rem;
     padding: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .difficulty-options {
+    gap: 15px;
+  }
+
+  .difficulty-button {
+    padding: 15px;
+    font-size: 1.1rem;
   }
 
   .game-canvas-container {
@@ -497,7 +508,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .game-title {
+  .game-title, .difficulty-title {
     font-size: 2rem;
   }
 
@@ -512,6 +523,19 @@ body {
     gap: 5px;
   }
 
+  .difficulty-options {
+    gap: 12px;
+  }
+
+  .difficulty-button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .difficulty-name {
+    font-size: 1.3rem;
+  }
+
   .instructions li {
     font-size: 0.9rem;
   }
@@ -523,6 +547,15 @@ body {
   .game-info p {
     font-size: 0.9rem;
     margin-bottom: 5px;
+  }
+
+  .high-score-display {
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  .high-score-number {
+    font-size: 1.3rem;
   }
 }
 
