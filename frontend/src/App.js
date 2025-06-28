@@ -142,38 +142,33 @@ const FruitBoxGame = () => {
     }
   };
 
-  // Animation loop for falling apples
-  const animate = useCallback(() => {
-    setFallingApples(prevFalling => {
-      return prevFalling.map(apple => ({
-        ...apple,
-        y: apple.y + apple.fallSpeed,
-        rotation: apple.rotation + apple.rotationSpeed,
-        opacity: Math.max(0, apple.opacity - 0.02)
-      })).filter(apple => apple.y < CANVAS_HEIGHT + 50 && apple.opacity > 0);
-    });
-
-    if (gameState === 'playing') {
-      animationRef.current = requestAnimationFrame(animate);
-    }
-  }, [gameState]);
-
-  // Start animation when game starts
+  // Load high score from localStorage
   useEffect(() => {
-    if (gameState === 'playing') {
-      animationRef.current = requestAnimationFrame(animate);
-    } else {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+    const savedHighScore = localStorage.getItem('fruitBoxHighScore');
+    if (savedHighScore) {
+      setHighScore(parseInt(savedHighScore));
     }
+  }, []);
 
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [gameState, animate]);
+  // Save high score when game ends
+  const updateHighScore = (newScore) => {
+    if (newScore > highScore) {
+      setHighScore(newScore);
+      localStorage.setItem('fruitBoxHighScore', newScore.toString());
+    }
+  };
+
+  // Start game with selected difficulty
+  const startGame = (selectedDifficulty) => {
+    const diffSetting = difficultySettings[selectedDifficulty];
+    setGameState('playing');
+    setScore(0);
+    setTimeLeft(diffSetting.time);
+    setTotalTime(diffSetting.time);
+    setDifficulty(selectedDifficulty);
+    setApples(generateApples());
+    setFallingApples([]);
+  };
   const startGame = (selectedDifficulty) => {
     const diffSetting = difficultySettings[selectedDifficulty];
     setGameState('playing');
