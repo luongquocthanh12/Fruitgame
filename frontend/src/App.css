@@ -133,6 +133,106 @@ body {
   gap: 10px;
 }
 
+/* High Score Display */
+.high-score-display {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.high-score-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Difficulty Menu */
+.difficulty-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.difficulty-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.difficulty-button {
+  padding: 20px;
+  border: 3px solid;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.difficulty-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 1);
+}
+
+.difficulty-button.easy {
+  border-color: #4ECDC4;
+  color: #4ECDC4;
+}
+
+.difficulty-button.medium {
+  border-color: #FFE66D;
+  color: #E6B800;
+}
+
+.difficulty-button.hard {
+  border-color: #FF6B6B;
+  color: #FF6B6B;
+}
+
+.difficulty-name {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.difficulty-time {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.back-button {
+  background: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+  border: 2px solid #6c757d;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: #6c757d;
+  color: white;
+  transform: translateY(-2px);
+}
+
 /* Playing Screen */
 .game-playing {
   background: rgba(255, 255, 255, 0.95);
