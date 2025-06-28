@@ -246,13 +246,48 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   padding: 15px;
   background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
   border-radius: 15px;
   color: white;
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.difficulty-indicator {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+/* Time Progress Bar */
+.time-progress-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.time-progress-bar {
+  height: 100%;
+  transition: width 1s linear;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  }
+  to {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  }
 }
 
 .light-toggle-btn {
