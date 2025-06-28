@@ -202,6 +202,7 @@ const FruitBoxGame = () => {
       }, 1000);
     } else if (timeLeft === 0) {
       updateHighScore(score);
+      playSound('gameOver');
       setGameState('gameOver');
     }
 
