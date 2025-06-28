@@ -428,8 +428,17 @@ const FruitBoxGame = () => {
         <div className="game-over">
           <div className="game-over-content">
             <h2>🎮 Kết thúc! 🎮</h2>
+            <div className="game-stats">
+              <div className="difficulty-completed">
+                Độ khó: <span style={{ color: difficultySettings[difficulty].color }}>
+                  {difficultySettings[difficulty].name}
+                </span>
+              </div>
+            </div>
             <div className="final-score">
               <p>Điểm cuối: <span className="score-number">{score}</span></p>
+              {score > highScore && <p className="new-record">🎉 Kỷ lục mới! 🎉</p>}
+              <p className="high-score-info">Cao nhất: {highScore}</p>
               <p className="score-message">
                 {score < 50 ? "Tiếp tục luyện tập!" : 
                  score < 100 ? "Làm tốt lắm!" : 
@@ -437,7 +446,7 @@ const FruitBoxGame = () => {
               </p>
             </div>
             <div className="game-over-buttons">
-              <button className="play-again-button" onClick={startGame}>
+              <button className="play-again-button" onClick={() => setGameState('difficulty')}>
                 Chơi lại
               </button>
               <button 
