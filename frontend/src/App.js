@@ -109,10 +109,11 @@ const FruitBoxGame = () => {
     if (gameState === 'playing' && apples.length > 0) {
       const gameEnded = checkGameEnd(apples);
       if (gameEnded) {
+        updateHighScore(score);
         setGameState('gameOver');
       }
     }
-  }, [apples, gameState, checkGameEnd]);
+  }, [apples, gameState, checkGameEnd, score]);
   useEffect(() => {
     if (gameState === 'playing' && timeLeft > 0) {
       gameIntervalRef.current = setTimeout(() => {
