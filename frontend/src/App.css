@@ -177,6 +177,7 @@ body {
   margin-bottom: 20px;
   border-radius: 15px;
   overflow: hidden;
+  overflow-x: auto;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
@@ -185,6 +186,7 @@ body {
   height: auto;
   cursor: crosshair;
   touch-action: none;
+  min-width: 300px;
 }
 
 .game-info {
