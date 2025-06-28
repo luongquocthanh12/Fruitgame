@@ -47,11 +47,30 @@ const FruitBoxGame = () => {
     return newApples;
   }, []);
 
-  // Start game
-  const startGame = () => {
+  // Load high score from localStorage
+  useEffect(() => {
+    const savedHighScore = localStorage.getItem('fruitBoxHighScore');
+    if (savedHighScore) {
+      setHighScore(parseInt(savedHighScore));
+    }
+  }, []);
+
+  // Save high score when game ends
+  const updateHighScore = (newScore) => {
+    if (newScore > highScore) {
+      setHighScore(newScore);
+      localStorage.setItem('fruitBoxHighScore', newScore.toString());
+    }
+  };
+
+  // Start game with selected difficulty
+  const startGame = (selectedDifficulty) => {
+    const diffSetting = difficultySettings[selectedDifficulty];
     setGameState('playing');
     setScore(0);
-    setTimeLeft(60);
+    setTimeLeft(diffSetting.time);
+    setTotalTime(diffSetting.time);
+    setDifficulty(selectedDifficulty);
     setApples(generateApples());
   };
 
