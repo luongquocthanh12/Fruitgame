@@ -127,21 +127,6 @@ const FruitBoxGame = () => {
     setCurrentRect(null);
     setIsDrawing(false);
   };
-  useEffect(() => {
-    const savedHighScore = localStorage.getItem('fruitBoxHighScore');
-    if (savedHighScore) {
-      setHighScore(parseInt(savedHighScore));
-    }
-  }, []);
-
-  // Save high score when game ends
-  const updateHighScore = (newScore) => {
-    if (newScore > highScore) {
-      setHighScore(newScore);
-      localStorage.setItem('fruitBoxHighScore', newScore.toString());
-    }
-  };
-
   // Load high score from localStorage
   useEffect(() => {
     const savedHighScore = localStorage.getItem('fruitBoxHighScore');
