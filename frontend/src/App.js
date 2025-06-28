@@ -317,6 +317,9 @@ const FruitBoxGame = () => {
             <p className="game-description">
               Vẽ hình chữ nhật quanh những quả táo có tổng chính xác bằng 10!
             </p>
+            <div className="high-score-display">
+              <p>🏆 Điểm cao nhất: <span className="high-score-number">{highScore}</span></p>
+            </div>
             <div className="menu-controls">
               <label className="light-colors-toggle">
                 <input
@@ -327,7 +330,7 @@ const FruitBoxGame = () => {
                 Màu sáng
               </label>
             </div>
-            <button className="start-button" onClick={startGame}>
+            <button className="start-button" onClick={() => setGameState('difficulty')}>
               Bắt đầu chơi
             </button>
             <div className="instructions">
@@ -336,10 +339,38 @@ const FruitBoxGame = () => {
                 <li>🖱️ Click và kéo để vẽ hình chữ nhật quanh táo</li>
                 <li>🔢 Đảm bảo tổng các số chính xác bằng 10</li>
                 <li>⭐ Mỗi quả táo cho bạn 1 điểm</li>
-                <li>⏰ Đua với thời gian hoặc đến khi hết táo!</li>
+                <li>⏰ Loại bỏ hết táo trước khi hết thời gian!</li>
                 <li>📏 Lưới: 17x10 = 170 quả táo</li>
+                <li>🎯 Táo không tạo mới trong một màn!</li>
               </ul>
             </div>
+          </div>
+        </div>
+      )}
+
+      {gameState === 'difficulty' && (
+        <div className="difficulty-menu">
+          <div className="menu-content">
+            <h2 className="difficulty-title">Chọn độ khó</h2>
+            <div className="difficulty-options">
+              {Object.entries(difficultySettings).map(([key, setting]) => (
+                <button
+                  key={key}
+                  className={`difficulty-button ${key}`}
+                  onClick={() => startGame(key)}
+                  style={{ borderColor: setting.color }}
+                >
+                  <div className="difficulty-name">{setting.name}</div>
+                  <div className="difficulty-time">{setting.time}s</div>
+                </button>
+              ))}
+            </div>
+            <button 
+              className="back-button" 
+              onClick={() => setGameState('menu')}
+            >
+              ⬅️ Quay lại
+            </button>
           </div>
         </div>
       )}
