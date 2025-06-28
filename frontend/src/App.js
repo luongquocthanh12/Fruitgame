@@ -302,7 +302,7 @@ const FruitBoxGame = () => {
           <div className="menu-content">
             <h1 className="game-title">🍎 Fruit Box 🍎</h1>
             <p className="game-description">
-              Draw rectangles around apples to make groups that sum to exactly 10!
+              Vẽ hình chữ nhật quanh những quả táo có tổng chính xác bằng 10!
             </p>
             <div className="menu-controls">
               <label className="light-colors-toggle">
@@ -311,19 +311,20 @@ const FruitBoxGame = () => {
                   checked={lightColors}
                   onChange={(e) => setLightColors(e.target.checked)}
                 />
-                Light Colors
+                Màu sáng
               </label>
             </div>
             <button className="start-button" onClick={startGame}>
-              Start Game
+              Bắt đầu chơi
             </button>
             <div className="instructions">
-              <h3>How to Play:</h3>
+              <h3>Cách chơi:</h3>
               <ul>
-                <li>🖱️ Click and drag to draw rectangles around apples</li>
-                <li>🔢 Make sure the numbers add up to exactly 10</li>
-                <li>⭐ Each apple gives you 1 point</li>
-                <li>⏰ Race against time!</li>
+                <li>🖱️ Click và kéo để vẽ hình chữ nhật quanh táo</li>
+                <li>🔢 Đảm bảo tổng các số chính xác bằng 10</li>
+                <li>⭐ Mỗi quả táo cho bạn 1 điểm</li>
+                <li>⏰ Đua với thời gian hoặc đến khi hết táo!</li>
+                <li>📏 Lưới: 17x10 = 170 quả táo</li>
               </ul>
             </div>
           </div>
