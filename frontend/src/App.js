@@ -119,11 +119,12 @@ const FruitBoxGame = () => {
         setTimeLeft(timeLeft - 1);
       }, 1000);
     } else if (timeLeft === 0) {
+      updateHighScore(score);
       setGameState('gameOver');
     }
 
     return () => clearTimeout(gameIntervalRef.current);
-  }, [gameState, timeLeft]);
+  }, [gameState, timeLeft, score]);
 
   // Draw apple
   const drawApple = (ctx, apple) => {
