@@ -191,6 +191,7 @@ const FruitBoxGame = () => {
       const gameEnded = checkGameEnd(apples);
       if (gameEnded) {
         updateHighScore(score);
+        playSound('gameOver');
         setGameState('gameOver');
       }
     }
