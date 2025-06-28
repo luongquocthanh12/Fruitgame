@@ -154,15 +154,6 @@ const FruitBoxGame = () => {
     setApples(generateApples());
     setFallingApples([]);
   };
-  const startGame = (selectedDifficulty) => {
-    const diffSetting = difficultySettings[selectedDifficulty];
-    setGameState('playing');
-    setScore(0);
-    setTimeLeft(diffSetting.time);
-    setTotalTime(diffSetting.time);
-    setDifficulty(selectedDifficulty);
-    setApples(generateApples());
-  };
 
   // Check if game should end (no valid moves left)
   const checkGameEnd = useCallback((currentApples) => {
