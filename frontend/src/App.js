@@ -3,15 +3,25 @@ import './App.css';
 
 const FruitBoxGame = () => {
   const canvasRef = useRef(null);
-  const [gameState, setGameState] = useState('menu'); // 'menu', 'playing', 'gameOver'
+  const [gameState, setGameState] = useState('menu'); // 'menu', 'difficulty', 'playing', 'gameOver'
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(120);
+  const [totalTime, setTotalTime] = useState(120);
+  const [difficulty, setDifficulty] = useState('medium');
+  const [highScore, setHighScore] = useState(0);
   const [apples, setApples] = useState([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
   const [currentRect, setCurrentRect] = useState(null);
   const [lightColors, setLightColors] = useState(false);
   const gameIntervalRef = useRef(null);
+
+  // Difficulty settings
+  const difficultySettings = {
+    easy: { time: 150, name: 'Dễ', color: '#4ECDC4' },
+    medium: { time: 120, name: 'Trung bình', color: '#FFE66D' },
+    hard: { time: 90, name: 'Khó', color: '#FF6B6B' }
+  };
 
   // Game constants
   const GRID_COLS = 17;
