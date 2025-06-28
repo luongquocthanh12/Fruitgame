@@ -210,26 +210,35 @@ const FruitBoxGame = () => {
     return () => clearTimeout(gameIntervalRef.current);
   }, [gameState, timeLeft, score]);
 
-  // Draw apple
-  const drawApple = (ctx, apple) => {
+  // Draw apple with texture support
+  const drawApple = (ctx, apple, texture = appleTextures.default) => {
     if (apple.removed) return;
 
     const radius = APPLE_SIZE / 2 - 5;
     
+    // Apply rotation if it's a falling apple
+    if (apple.rotation !== undefined) {
+      ctx.save();
+      ctx.translate(apple.x, apple.y);
+      ctx.rotate(apple.rotation);
+      ctx.globalAlpha = apple.opacity || 1;
+      ctx.translate(-apple.x, -apple.y);
+    }
+    
     // Apple body
-    ctx.fillStyle = lightColors ? '#FFB3BA' : '#FF6B6B';
+    ctx.fillStyle = texture.bodyColor;
     ctx.beginPath();
     ctx.arc(apple.x, apple.y, radius, 0, Math.PI * 2);
     ctx.fill();
 
     // Apple highlight
-    ctx.fillStyle = lightColors ? '#FFD1DC' : '#FF8E8E';
+    ctx.fillStyle = texture.highlightColor;
     ctx.beginPath();
     ctx.arc(apple.x - radius / 3, apple.y - radius / 3, radius / 3, 0, Math.PI * 2);
     ctx.fill();
 
     // Apple stem
-    ctx.strokeStyle = '#4ECDC4';
+    ctx.strokeStyle = texture.stemColor;
     ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(apple.x, apple.y - radius);
@@ -237,7 +246,7 @@ const FruitBoxGame = () => {
     ctx.stroke();
 
     // Leaf
-    ctx.fillStyle = '#4ECDC4';
+    ctx.fillStyle = texture.leafColor;
     ctx.beginPath();
     ctx.ellipse(apple.x + 5, apple.y - radius - 5, 8, 4, Math.PI / 4, 0, Math.PI * 2);
     ctx.fill();
@@ -248,6 +257,10 @@ const FruitBoxGame = () => {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(apple.value.toString(), apple.x, apple.y);
+
+    if (apple.rotation !== undefined) {
+      ctx.restore();
+    }
   };
 
   // Draw canvas
